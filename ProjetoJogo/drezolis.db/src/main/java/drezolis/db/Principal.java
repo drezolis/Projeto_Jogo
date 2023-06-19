@@ -2,21 +2,22 @@ package drezolis.db;
 
 import javax.swing.JOptionPane;
 
+import entities.Jogador;
+import utilities.JogadorDao;
 public class Principal {
 
 	public static void main(String[] args) {
-		PessoaDao servico = new PessoaDao();
-		String menu = "1-Cadastrar\n2-Atualizar\n3-Apagar\n4-Listar\n5-Mostrar Um\n0-Sair";
+		JogadorDao cadastro = new JogadorDao();
+		String menu = "1 - Cadastrar\n2 - Atualizar\n3 - Apagar\n4 - Listar\n5 - Mostrar Um\n0 - Sair";
 		int op;
 		do{
 			op = Integer.parseInt(JOptionPane.showInputDialog(menu));
 			switch (op){
 			case 1:
 				String nome = JOptionPane.showInputDialog("Nome?");
-				String telefone = JOptionPane.showInputDialog("Telefone?");
-			  	String email = JOptionPane.showInputDialog("Email?");
-			   	Pessoa p = new Pessoa(nome, telefone, email);
-			 	servico.inserir(p);
+				String apelido = JOptionPane.showInputDialog("Apelido?");
+				Jogador p = new Jogador(nome, apelido);
+				cadastro.inserir(p);
 				break;
 			case 2:
 				break;
