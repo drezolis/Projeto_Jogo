@@ -4,16 +4,16 @@
   <artifactId>drezolis.db</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>ProjetoJogo</name>
-  <properties>
-     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>7</maven.compiler.source>
-        <maven.compiler.target>7</maven.compiler.target>
-  </properties>
-  <dependencies>
-     <dependency>
-         <groupId>mysql</groupId>
-         <artifactId>mysql-connector-java</artifactId>
-         <version>8.0.19</version>
-     </dependency>
-  </dependencies>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.19</version>
+        </dependency>
+    </dependencies>
 </project>

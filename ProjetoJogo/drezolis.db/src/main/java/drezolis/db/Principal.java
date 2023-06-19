@@ -4,6 +4,10 @@ import javax.swing.JOptionPane;
 
 import entities.Jogador;
 import utilities.JogadorDao;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Principal {
 
 	public static void main(String[] args) {
@@ -20,12 +24,34 @@ public class Principal {
 				cadastro.inserir(p);
 				break;
 			case 2:
+				nome = JOptionPane.showInputDialog("Nome?");
+				apelido = JOptionPane.showInputDialog("Apelido?");
+				int id = Integer.parseInt(JOptionPane.showInputDialog("Id?"));
+				p = new Jogador(nome, apelido);
+				p.setNome(nome);
+				p.setApelido(apelido);
+				p.setId(id);
+				cadastro.atualizar(p);
 				break;
 			case 3:
+				id = Integer.parseInt(JOptionPane.showInputDialog("ID?"));
+				cadastro.apagar(id);
 				break;
 			case 4:
+				List<Jogador> pessoas = new ArrayList<>();
+				cadastro.listar();
+				for (int index=0;index<pessoas.size();index++) {
+					System.out.println(pessoas.get(index).toString());
+				}
 				break;
 			case 5:
+				id = Integer.parseInt(JOptionPane.showInputDialog("ID?"));
+				p = new Jogador();
+				p = cadastro.mostraPorId(id);
+				if (!p.getNome().equals("")) {
+					System.out.println(p);
+				}
+
 				break;
 			case 0:
 				break;

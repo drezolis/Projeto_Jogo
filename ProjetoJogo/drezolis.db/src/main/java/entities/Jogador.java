@@ -1,15 +1,22 @@
 package entities;
 
 public class Jogador {
-	
+
+	private int id;
 	private String nome;
 	private String apelido;
-	
-      
 
-      public Jogador(String nome2, String apelido2) {
-      }
-      public String getNome() {
+	public Jogador(String nome, String apelido) {
+		this.nome = nome;
+		this.apelido = apelido;
+	}
+
+	public Jogador() {
+
+	}
+
+
+	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
@@ -21,6 +28,12 @@ public class Jogador {
 	public void setApelido(String apelido) {
 		this.apelido = apelido;
 	}
-	
-	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 }
