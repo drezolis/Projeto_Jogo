@@ -3,7 +3,9 @@ package drezolis.db;
 import javax.swing.JOptionPane;
 
 import entities.Jogador;
+import entities.Jogo;
 import utilities.JogadorDao;
+import utilities.JogoDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,49 +13,88 @@ import java.util.List;
 public class Principal {
 
 	public static void main(String[] args) {
-		JogadorDao cadastro = new JogadorDao();
-		String menu = "1 - Cadastrar\n2 - Atualizar\n3 - Apagar\n4 - Listar\n5 - Mostrar Um\n0 - Sair";
+		JogadorDao jogadorCrud = new JogadorDao();
+		JogoDao jogoCrud = new JogoDao();
+		String menu = "1 - Cadastrar Jogador\n2 - Atualizar Jogador\n3 - Apagar Jogador\n4 - Listar Jogadores\n5 - Mostrar Jogador\n" +
+				"6 - Cadastrar Jogo\n7 - Atualizar Jogo\n8 - Apagar Jogo\n9 - Listar Jogos\n10 - Mostrar Jogo\n" +
+				"0 - Sair";
 		int op;
 		do{
 			op = Integer.parseInt(JOptionPane.showInputDialog(menu));
 			switch (op){
 			case 1:
-				String nome = JOptionPane.showInputDialog("Nome?");
-				String apelido = JOptionPane.showInputDialog("Apelido?");
-				Jogador p = new Jogador(nome, apelido);
-				cadastro.inserir(p);
+				String nomeJogador = JOptionPane.showInputDialog("Nome?");
+				String apelidoJogador = JOptionPane.showInputDialog("Apelido?");
+				Jogador jogador = new Jogador(nomeJogador, apelidoJogador);
+				jogadorCrud.inserir(jogador);
 				break;
 			case 2:
-				nome = JOptionPane.showInputDialog("Nome?");
-				apelido = JOptionPane.showInputDialog("Apelido?");
+				nomeJogador = JOptionPane.showInputDialog("Nome?");
+				apelidoJogador = JOptionPane.showInputDialog("Apelido?");
 				int id = Integer.parseInt(JOptionPane.showInputDialog("Id?"));
-				p = new Jogador(nome, apelido);
-				p.setNome(nome);
-				p.setApelido(apelido);
-				p.setId(id);
-				cadastro.atualizar(p);
+				jogador = new Jogador(nomeJogador, apelidoJogador);
+				jogador.setNome(nomeJogador);
+				jogador.setApelido(apelidoJogador);
+				jogador.setId(id);
+				jogadorCrud.atualizar(jogador);
 				break;
 			case 3:
 				id = Integer.parseInt(JOptionPane.showInputDialog("ID?"));
-				cadastro.apagar(id);
+				jogadorCrud.apagar(id);
 				break;
 			case 4:
 				List<Jogador> pessoas = new ArrayList<>();
-				cadastro.listar();
+				jogadorCrud.listar();
 				for (int index=0;index<pessoas.size();index++) {
 					System.out.println(pessoas.get(index).toString());
 				}
 				break;
 			case 5:
 				id = Integer.parseInt(JOptionPane.showInputDialog("ID?"));
-				p = new Jogador();
-				p = cadastro.mostraPorId(id);
-				if (!p.getNome().equals("")) {
-					System.out.println(p);
+				jogador = new Jogador();
+				jogador = jogadorCrud.mostraPorId(id);
+				if (!jogador.getNome().equals("")) {
+					System.out.println(jogador);
 				}
 
 				break;
-			case 0:
+			case 6:
+				String nomeJogo = JOptionPane.showInputDialog("Nome?");
+				String temaJogo = JOptionPane.showInputDialog("Tema?");
+				int pontMax = Integer.parseInt(JOptionPane.showInputDialog("Pontuação máxima?"));
+				Jogo jogo = new Jogo(nomeJogo, temaJogo, pontMax);
+				jogoCrud.inserir(jogo);
+				break;
+			case 7:
+				id = Integer.parseInt(JOptionPane.showInputDialog("Id?"));
+				nomeJogo = JOptionPane.showInputDialog("Nome?");
+				temaJogo = JOptionPane.showInputDialog("Tema?");
+				pontMax = Integer.parseInt(JOptionPane.showInputDialog("Pontuação máxima?"));
+				jogo = new Jogo(nomeJogo, temaJogo, pontMax);
+				jogo.setNome(nomeJogo);
+				jogo.setTema(temaJogo);
+				jogo.setId(id);
+				jogoCrud.atualizar(jogo);
+				break;
+			case 8:
+				id = Integer.parseInt(JOptionPane.showInputDialog("ID?"));
+				jogoCrud.apagar(id);
+				break;
+			case 9:
+				List<Jogo> jogos = new ArrayList<>();
+				jogoCrud.listar();
+				for (int index=0;index<jogos.size();index++) {
+					System.out.println(jogos.get(index).toString());
+				}
+				break;
+			case 10:
+				id = Integer.parseInt(JOptionPane.showInputDialog("ID?"));
+				jogo = new Jogo();
+				jogo = jogoCrud.mostraPorId(id);
+				if (jogo != null && !jogo.getNome().equals("")) {
+					System.out.println(jogo);
+				}
+
 				break;
 			default:
 				JOptionPane.showMessageDialog(null, "Opção inválida");
