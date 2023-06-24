@@ -4,8 +4,10 @@ import javax.swing.JOptionPane;
 
 import entities.Jogador;
 import entities.Jogo;
+import entities.Pontuacao;
 import utilities.JogadorDao;
 import utilities.JogoDao;
+import utilities.PontuacaoDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +17,9 @@ public class Principal {
 	public static void main(String[] args) {
 		JogadorDao jogadorCrud = new JogadorDao();
 		JogoDao jogoCrud = new JogoDao();
+		PontuacaoDao pontuacaoCrud = new PontuacaoDao();
 		String menu = "1 - Cadastrar Jogador\n2 - Atualizar Jogador\n3 - Apagar Jogador\n4 - Listar Jogadores\n5 - Mostrar Jogador\n" +
-				"6 - Cadastrar Jogo\n7 - Atualizar Jogo\n8 - Apagar Jogo\n9 - Listar Jogos\n10 - Mostrar Jogo\n" +
+				"6 - Cadastrar Jogo\n7 - Atualizar Jogo\n8 - Apagar Jogo\n9 - Listar Jogos\n10 - Mostrar Jogo\n11 - Cadastrar Pontuação\n12 - Mostrar Pontuação\n" +
 				"0 - Sair";
 		int op;
 		do{
@@ -95,6 +98,30 @@ public class Principal {
 					System.out.println(jogo);
 				}
 
+				break;
+			case 11:
+				int jogadorId = Integer.parseInt(JOptionPane.showInputDialog("ID do Jogador?"));
+				int jogoId = Integer.parseInt(JOptionPane.showInputDialog("ID do Jogo?"));
+				int pontuacao = Integer.parseInt(JOptionPane.showInputDialog("Pontuação?"));
+				jogador = jogadorCrud.mostraPorId(jogadorId);
+				jogo = jogoCrud.mostraPorId(jogoId);
+				Pontuacao pontuacaoNova;
+				if (jogador != null && jogo != null) {
+					pontuacaoNova = new Pontuacao(pontuacao, jogador, jogo);
+					pontuacaoCrud.inserir(pontuacaoNova);
+				}
+				break;
+			case 12:
+				jogadorId = Integer.parseInt(JOptionPane.showInputDialog("ID do Jogador?"));
+				jogoId = Integer.parseInt(JOptionPane.showInputDialog("ID do Jogo?"));
+				jogador = jogadorCrud.mostraPorId(jogadorId);
+				jogo = jogoCrud.mostraPorId(jogoId);
+				if (jogador != null && jogo != null) {
+					pontuacaoNova = pontuacaoCrud.mostrarPontuacao(jogador, jogo);
+					System.out.println(pontuacaoNova);
+				}
+				break;
+			case 0:
 				break;
 			default:
 				JOptionPane.showMessageDialog(null, "Opção inválida");
