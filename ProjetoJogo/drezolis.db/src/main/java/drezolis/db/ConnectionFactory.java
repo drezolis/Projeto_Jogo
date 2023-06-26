@@ -9,19 +9,18 @@ public class ConnectionFactory {
     private String host = "localhost";
     private String porta = "3306";
     private String bd = "projeto_jogo";
-    
-    public Connection obtemConexao (){
-        try{
+
+    public Connection obtemConexao() {
+        try {
             Connection c = DriverManager.getConnection(
-               "jdbc:mysql://" + host + ":" + porta + "/" + bd + 
-               "?autoReconnect=true&serverTimezone=UTC&useSSL=False"
-               + "&allowPublicKeyRetrieval=true",
-                usuario,
-                senha
+                    "jdbc:mysql://" + host + ":" + porta + "/" + bd +
+                            "?autoReconnect=true&serverTimezone=UTC&useSSL=False"
+                            + "&allowPublicKeyRetrieval=true",
+                    usuario,
+                    senha
             );
             return c;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

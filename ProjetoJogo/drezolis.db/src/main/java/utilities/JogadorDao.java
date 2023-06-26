@@ -13,22 +13,15 @@ import javax.swing.*;
 
 public class JogadorDao {
     public void inserir(Jogador jogador) {
-
-        // Comando SQL em String
         String sql = "INSERT INTO jogador (nome, apelido) VALUES (?, ?)";
 
-        // Abertura de conexão
         ConnectionFactory factory = new ConnectionFactory();
-
         try (Connection c = factory.obtemConexao()) {
-            // Pré compilação do comando
             PreparedStatement ps = c.prepareStatement(sql);
 
-            // Preenche os dados faltantes
             ps.setString(1, jogador.getNome());
             ps.setString(2, jogador.getApelido());
 
-            // Executa o comando
             ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -37,19 +30,16 @@ public class JogadorDao {
     }
 
     public void atualizar(Jogador jogador) {
-        //1: Definir o comando SQL
         String sql = "UPDATE jogador SET nome = ?, apelido = ? WHERE id = ?";
-        //2: Abrir uma conexao
+
         ConnectionFactory factory = new ConnectionFactory();
         try (Connection c = factory.obtemConexao()) {
-            //3: Pre compila o comando
             PreparedStatement ps = c.prepareStatement(sql);
-            //4: Preenche os dados faltantes
+
             ps.setString(1, jogador.getNome());
             ps.setString(2, jogador.getApelido());
             ps.setInt(3, jogador.getId());
 
-            //5: Executa o comando
             ps.execute();
 
         } catch (Exception e) {
@@ -58,16 +48,14 @@ public class JogadorDao {
     }
 
     public void apagar(int id) {
-        //1: Definir o comando SQL
         String sql = "DELETE FROM jogador WHERE id = ?";
-        //2: Abrir uma conexao
+
         ConnectionFactory factory = new ConnectionFactory();
         try (Connection c = factory.obtemConexao()) {
-            //3: Pre compila o comando
             PreparedStatement ps = c.prepareStatement(sql);
-            //4: Preenche os dados faltantes
+
             ps.setInt(1, id);
-            //5: Executa o comando
+
             ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,16 +63,13 @@ public class JogadorDao {
     }
 
     public void listar() {
-        //1: Definir o comando SQL
         String sql = "SELECT * FROM jogador";
-        //2: Abrir uma conexão
+
         ConnectionFactory factory = new ConnectionFactory();
         try (Connection c = factory.obtemConexao()) {
-            //3: Pré compila o comando
             PreparedStatement ps = c.prepareStatement(sql);
-            //4: Executa o comando e guarda o resultado em um ResultSet
+
             ResultSet rs = ps.executeQuery();
-            //5: itera sobre o resultado
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String nome = rs.getString("nome");
